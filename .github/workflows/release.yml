@@ -1,0 +1,42 @@
+name: Tag & Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      TAG_NAME:
+        description: 'Tag name. eg) 1.0.0 or 1.0.0-rc.1'
+        required: true
+
+jobs:
+  release:
+    name: Release ${{ github.event.inputs.TAG_NAME }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Login
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout this repository
+        uses: actions/checkout@v2.3.4
+        with:
+          path: ${{ github.repository }}
+
+      - name: Bump version
+        env:
+          VERSION: ${{ github.event.inputs.TAG_NAME }}
+          DIRECTORY: 
+        run: |
+          docker build . -t nuclio_lighting_flash
+          docker tag nuclio_lighting_flash ghcr.io/greenroom-robotics/nuclio_lighting_flash:latest
+          docker tag nuclio_lighting_flash ghcr.io/greenroom-robotics/nuclio_lighting_flash:${{github.event.inputs.TAG_NAME}}
+          docker push nuclio_lighting_flash ghcr.io/greenroom-robotics/nuclio_lighting_flash:latest
+          docker push nuclio_lighting_flash ghcr.io/greenroom-robotics/nuclio_lighting_flash:${{github.event.inputs.TAG_NAME}}
+
+      - name: Create a release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.inputs.TAG_NAME }}
+          generate_release_notes: true

@@ -1,0 +1,1 @@
+docker build . -t ghcr.io/greenroom-robotics/nuclio_lighting_flash
