@@ -19,15 +19,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Checkout this repository
-        uses: actions/checkout@v2.3.4
-        with:
-          path: ${{ github.repository }}
+      - uses: actions/checkout@v2
 
       - name: Bump version
-        env:
-          VERSION: ${{ github.event.inputs.TAG_NAME }}
-          DIRECTORY: 
         run: |
           docker build . -t nuclio_lighting_flash
           docker tag nuclio_lighting_flash ghcr.io/greenroom-robotics/nuclio_lighting_flash:latest
