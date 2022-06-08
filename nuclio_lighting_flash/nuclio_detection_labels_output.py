@@ -7,6 +7,7 @@ from flash.core.registry import FlashRegistry
 from flash.core.utilities.imports import _FIFTYONE_AVAILABLE, lazy_import, requires
 from flash.core.utilities.providers import _FIFTYONE
 
+
 class NuclioDetectionLabelsOutput(Output):
     """A :class:`.Output` which converts model outputs to Nuclio detection format.
 
@@ -33,7 +34,9 @@ class NuclioDetectionLabelsOutput(Output):
 
         preds = sample[DataKeys.PREDS]
 
-        for bbox, label, score in zip(preds["bboxes"], preds["labels"], preds["scores"]):
+        for bbox, label, score in zip(
+            preds["bboxes"], preds["labels"], preds["scores"]
+        ):
             confidence = score.tolist()
 
             if self.threshold is not None and confidence < self.threshold:
@@ -53,11 +56,11 @@ class NuclioDetectionLabelsOutput(Output):
                 label = str(int(label))
 
             detections.append(
-              {
-                  "confidence": confidence,
-                  "label": label,
-                  "points": box,
-                  "type": "rectangle",
-              }
+                {
+                    "confidence": confidence,
+                    "label": label,
+                    "points": box,
+                    "type": "rectangle",
+                }
             )
         return detections

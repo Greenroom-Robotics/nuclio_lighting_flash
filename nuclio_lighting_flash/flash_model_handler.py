@@ -13,12 +13,7 @@ class MockTrainer(Trainer):
 
 
 class FlashModelHandler:
-    def __init__(
-        self,
-        model: ObjectDetector,
-        image_size = 1024,
-        labels = {}
-    ):
+    def __init__(self, model: ObjectDetector, image_size=1024, labels={}):
         self.image_size = image_size
         self.labels = labels
         self.model = model
@@ -39,4 +34,6 @@ class FlashModelHandler:
             datamodule=datamodule,
             output=NuclioDetectionLabelsOutput(threshold=threshold, labels=self.labels),
         )
-        return predictions
+        if predictions is None:
+            return []
+        return predictions[0][0]
