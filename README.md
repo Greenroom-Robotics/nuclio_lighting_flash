@@ -1,7 +1,6 @@
 # Nuclio Lighting Flash
 
-This repo builds a base image "GreenroomRobotics/nuclio_lighting_flash" which can be used to run flash ObjectDetection models in Nuclio / CVAT
-
+This repo builds a base image [ghcr.io/greenroom-robotics/nuclio_lighting_flash:latest](ghcr.io/greenroom-robotics/nuclio_lighting_flash:latest) which is used to conveniently run flash ObjectDetection models in Nuclio / CVAT. It allows you to configure the model `head`, `backbone` and `checkpoint_path` from your nuclio `function.yml`
 
 ## Usage
 

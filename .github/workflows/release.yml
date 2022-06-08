@@ -21,13 +21,13 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: Bump version
+      - name: Build Docker Image and Tag
         run: |
           docker build . -t nuclio_lighting_flash
           docker tag nuclio_lighting_flash ghcr.io/greenroom-robotics/nuclio_lighting_flash:latest
           docker tag nuclio_lighting_flash ghcr.io/greenroom-robotics/nuclio_lighting_flash:${{github.event.inputs.TAG_NAME}}
-          docker push nuclio_lighting_flash ghcr.io/greenroom-robotics/nuclio_lighting_flash:latest
-          docker push nuclio_lighting_flash ghcr.io/greenroom-robotics/nuclio_lighting_flash:${{github.event.inputs.TAG_NAME}}
+          docker push ghcr.io/greenroom-robotics/nuclio_lighting_flash:latest
+          docker push ghcr.io/greenroom-robotics/nuclio_lighting_flash:${{github.event.inputs.TAG_NAME}}
 
       - name: Create a release
         uses: softprops/action-gh-release@v1
