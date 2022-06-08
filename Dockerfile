@@ -1,4 +1,5 @@
 FROM pytorchlightning/pytorch_lightning:1.6.4-py3.9-torch1.9
+LABEL org.opencontainers.image.source=https://github.com/Greenroom-Robotics/nuclio_lighting_flash
 
 COPY ./nuclio_lighting_flash /opt/nuclio
 
