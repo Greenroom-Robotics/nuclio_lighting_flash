@@ -34,9 +34,7 @@ class NuclioDetectionLabelsOutput(Output):
 
         preds = sample[DataKeys.PREDS]
 
-        for bbox, label, score in zip(
-            preds["bboxes"], preds["labels"], preds["scores"]
-        ):
+        for bbox, label, score in zip(preds["bboxes"], preds["labels"], preds["scores"]):
             confidence = score.tolist()
 
             if self.threshold is not None and confidence < self.threshold:

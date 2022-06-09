@@ -5,7 +5,6 @@ from flash.image import ObjectDetector
 from flash.core.data.io.output import Output
 from flash.core.data.io.input import DataKeys
 from flash.core.data.data_module import DataModule
-from flash.core.data.io.input import DataKeys
 from flash.core.data.io.output_transform import OutputTransform
 from flash.core.trainer import Trainer
 from flash.core.utilities.stages import RunningStage

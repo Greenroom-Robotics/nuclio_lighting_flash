@@ -18,7 +18,7 @@ nuctl deploy --project-name cvat \
 
 ### Get started
 
-In order to develop you'll want a nuclio instance running on your local machine... 
+In order to develop you'll want a nuclio instance running on your local machine...
 
 * `docker-compose up` to start nuclio.
 * `./scripts/build.sh` to build `ghcr.io/greenroom-robotics/nuclio_lighting_flash:latest`
@@ -29,6 +29,10 @@ nuctl deploy --project-name cvat \
   --path example/lightningflash-efficientdet-d0 \
   --platform local
 ```
+
+### Run tests
+
+* `./scripts/build.sh && docker run ghcr.io/greenroom-robotics/nuclio_lighting_flash:latest` to build and run pytests
 
 ### Release a version
 
