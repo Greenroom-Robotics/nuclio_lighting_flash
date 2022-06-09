@@ -35,8 +35,7 @@ class FlashModelHandler:
             output=NuclioDetectionLabelsOutput(
                 threshold=threshold,
                 labels=self.labels,
-                image_width=image.width,
-                image_height=image.height,
+                image=image,
             ),
         )
         if predictions is None:

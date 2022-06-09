@@ -19,13 +19,13 @@ def test_main():
             {
                 "confidence": 0.92,
                 "label": "giraffe",
-                "points": [372.63, 114.84, 601.54, 315.84],
+                "points": [372, 65, 601, 367],
                 "type": "rectangle",
             },
             {
                 "confidence": 0.87,
                 "label": "giraffe",
-                "points": [52.77, 305.4, 185.64, 349.67],
+                "points": [52, 351, 185, 417],
                 "type": "rectangle",
             },
         ]
