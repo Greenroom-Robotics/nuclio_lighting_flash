@@ -1,13 +1,16 @@
+# This is a base function.yml
+# It will be overwritten when you deploy your own nuclio function
+
 metadata:
-  name: lightningflash-from-checkpoint
+  name: lightningflash-efficientdet-d0
   namespace: cvat
   annotations:
-    name: Flash - From Checkout
+    name: Flash - EfficientDet d0
     type: detector
     framework: pytorch
-    # head: efficientdet # any flash ObjectDetector head
-    # backbone: d0       # any flash ObjectDetector backbone
-    checkpoint_path: http://some-path-to-a-model.pt # path to a model checkpoint
+    head: efficientdet # any flash ObjectDetector head
+    backbone: d0       # any flash ObjectDetector backbone
+    # checkpoint_path: # path to a model checkpoint
     spec: |
       [
         { "id": 1, "name": "person" },
@@ -102,9 +105,8 @@ metadata:
         { "id": 90, "name": "toothbrush" },
         { "id": 91, "name": "hairbrush" }
       ]
-
 spec:
-  description: "object detector from checkpoint"
+  description: "head: efficientdet, backbone: d0"
   runtime: 'python:3.6'
   handler: main:handler
   eventTimeout: 30s
