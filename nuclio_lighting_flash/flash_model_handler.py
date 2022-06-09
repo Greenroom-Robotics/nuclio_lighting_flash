@@ -32,7 +32,12 @@ class FlashModelHandler:
         predictions = self.trainer.predict(
             self.model,
             datamodule=datamodule,
-            output=NuclioDetectionLabelsOutput(threshold=threshold, labels=self.labels),
+            output=NuclioDetectionLabelsOutput(
+                threshold=threshold,
+                labels=self.labels,
+                image_width=image.width,
+                image_height=image.height,
+            ),
         )
         if predictions is None:
             return []

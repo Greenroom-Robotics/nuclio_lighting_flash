@@ -17,4 +17,4 @@ WORKDIR /opt/nuclio
 
 # Run the tests
 # Nuclio will overwrite this CMD when it is deployed
-CMD pytest .
+CMD pytest . -vv
