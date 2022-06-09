@@ -3,10 +3,22 @@ import json
 import base64
 from PIL import Image
 import io
+import numpy as np
 import yaml
 
 from flash.image import ObjectDetector
 from flash_model_handler import FlashModelHandler
+
+
+class NpEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.integer):
+            return int(obj)
+        if isinstance(obj, np.floating):
+            return float(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return json.JSONEncoder.default(self, obj)
 
 
 def init_context(context):
@@ -19,6 +31,10 @@ def init_context(context):
 
     labels_spec = annotations["spec"]
     labels = {item["id"]: item["name"] for item in json.loads(labels_spec)}
+
+    print(f"Model head: {annotations['head']}")
+    print(f"Model backbone: {annotations['backbone']}")
+    print(f"Num classes: {len(labels)}")
 
     # Read the DL model
     # Either "checkpoint_path" or "head" and "backbone" should be specified
@@ -48,7 +64,7 @@ def handler(context, event):
     results = context.user_data.model.infer(image, threshold)
 
     return context.Response(
-        body=json.dumps(results),
+        body=json.dumps(results, cls=NpEncoder),
         headers={},
         content_type="application/json",
         status_code=200,
