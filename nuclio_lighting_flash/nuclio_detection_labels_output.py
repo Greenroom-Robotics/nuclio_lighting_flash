@@ -60,10 +60,10 @@ class NuclioDetectionLabelsOutput(Output):
             # the actual image size, "self.image_width", " self.image_height".
             # This is why we "/ width * self.image_width" etc
             box = [
-                bbox["xmin"] / width * self.image_width,
-                bbox["ymin"] / height * self.image_height,
-                (bbox["xmin"] + bbox["width"]) / width * self.image_width,
-                (bbox["ymin"] + bbox["height"]) / height * self.image_height,
+                round(bbox["xmin"] / width * self.image_width, 2),
+                round(bbox["ymin"] / height * self.image_height, 2),
+                round((bbox["xmin"] + bbox["width"]) / width * self.image_width, 2),
+                round((bbox["ymin"] + bbox["height"]) / height * self.image_height, 2),
             ]
 
             label = label.item()
@@ -74,7 +74,7 @@ class NuclioDetectionLabelsOutput(Output):
 
             detections.append(
                 {
-                    "confidence": confidence,
+                    "confidence": round(confidence, 2),
                     "label": label,
                     "points": box,
                     "type": "rectangle",
