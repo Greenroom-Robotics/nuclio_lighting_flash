@@ -30,6 +30,10 @@ nuctl deploy --project-name cvat \
   --platform local
 ```
 
+### Num Classes
+
+It is important to note that the num_classes (labels) differs for many pretrained model. If you are getting no detections and you think you should, your num_classes is probably wrong. See [this](https://tech.amikelive.com/node-718/what-object-categories-labels-are-in-coco-dataset/) for how the coco labels changed over time
+
 ### Run tests
 
 * `./scripts/build.sh && docker run ghcr.io/greenroom-robotics/nuclio_lighting_flash:latest` to build and run pytests
